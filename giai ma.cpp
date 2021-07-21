@@ -1,64 +1,32 @@
-#include <iostream>
-#include <stack>
-#include <queue>
-#include <algorithm>
-#include <cmath>
-#include <sstream>
+#include <bits/stdc++.h>
 using namespace std;
-
-struct so
-{
-	int num;
-	int stt;
-};
 
 int main()
 {
-	int t;
-	cin >> t;
-	while (t--)
-	{
-		int n;
-		cin >> n;
-		queue<so> q;
-		int bac = 0;
-		so k;
-		k.num = n;
-		k.stt = 0;
-		q.push(k);
-		while (true)
-		{
-				
-			so x = q.front();
-			if (x.num == 1)
-			{
-				cout << x.stt <<endl;
-				break;
-			}
 
-			if (x.num % 2 == 0)
-			{
-				so x1;
-				x1.num = x.num / 2;
-				x1.stt = x.stt + 1;
-				q.push(x1);
-			}
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        string a;
+        cin >> a;
+        int dp[a.size() + 5];
+        if (a[0] == '0')
+        {
+            cout << 0 << endl;
+        }
+        else
+        {
+            dp[0]=1;
+            dp[1]=1;
+            for (int i = 2;i<=a.size();i++){
+                dp[i]=0;
+                if (a[i-1]!='0') dp[i]=dp[i-1];
+                if ((a[i-2]=='1')||(a[i-2]=='2'&&a[i-1]<='6')) dp[i]+=dp[i-2];
+            }
+            cout <<dp[a.size()]<<endl;
+        }
+    }
 
-			if (x.num % 3 == 0)
-			{
-				so x1;
-				x1.num = x.num / 3;
-				x1.stt = x.stt + 1;
-				q.push(x1);
-			}
-
-			so x1;
-			x1.num = x.num -1;
-			x1.stt = x.stt + 1;
-			q.push(x1);
-			q.pop();
-		}
-	}
+    return 0;
 }
-
-
